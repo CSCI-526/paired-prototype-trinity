@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     public GameObject guessPanel;
     public TMP_InputField guessInput;                // TMP InputField
+<<<<<<< HEAD
     public TextMeshProUGUI messageText;              // TMP Text
     public TextMeshProUGUI availableLettersText;     // TMP Text
     
@@ -31,12 +32,18 @@ public class GameManager : MonoBehaviour
     [Header("Congratulations UI")]
     public GameObject congratulationsPanel;         // Panel for congratulations message
     public TextMeshProUGUI congratulationsText;     // Text for the congratulations message
+=======
+    public TextMeshProUGUI triesText;                // TMP Text
+    public TextMeshProUGUI messageText;              // TMP Text
+    public TextMeshProUGUI availableLettersText;     // TMP Text
+>>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
 
     [Header("Word list")]
     public string[] wordList = { "GAME", "PLAY", "WORD", "JUMP" };
 
     private string currentWord;
     private int triesLeft = 3;
+<<<<<<< HEAD
     private bool hasGuessedCorrectly = false; // Track if player has already guessed correctly
     private bool isInCollectionMode = false; // Track if player is in collection mode (after clicking OK)
     private bool isGameOver = false; // Track if the game is over (all tries failed)
@@ -51,6 +58,12 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+=======
+
+        // Called when the player touches a collectible block
+    public void CollectBlock(CollectibleBlock block)
+    {
+>>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
         Debug.Log($"🔵 GameManager.CollectBlock called with block: {block?.name}, collected: {block?.collected}");
         Debug.Log($"🔵 GameManager Instance: {Instance != null}, StackAnchor: {stackAnchor != null}");
         
@@ -81,6 +94,7 @@ public class GameManager : MonoBehaviour
             Debug.LogError("❌ Please assign availableLettersText in GameManager Inspector!");
         }
 
+<<<<<<< HEAD
         // Provide collection progress feedback
         int collectedCount = GetCollectedBlocksCount();
         int totalBlocks = collectibleBlocks != null ? collectibleBlocks.Length : 0;
@@ -94,6 +108,8 @@ public class GameManager : MonoBehaviour
             Debug.Log($"📊 Updated message: Collected '{letter}', {collectedCount}/{totalBlocks} blocks");
         }
 
+=======
+>>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
         // Stack the block visually on player
         if (stackAnchor != null)
         {
@@ -140,6 +156,7 @@ public class GameManager : MonoBehaviour
     // Called when the player reaches the river trigger
     public void PlayerEnteredRiver()
     {
+<<<<<<< HEAD
         Debug.Log("🌊 Player entered river! Checking if all blocks are collected.");
         
         // Check if all 5 blocks are collected
@@ -506,12 +523,22 @@ public class GameManager : MonoBehaviour
         {
             playerController.SetCanMove(false);
             Debug.Log("📋 Player movement FROZEN - cannot move until OK is clicked");
+=======
+        Debug.Log("🌊 Player entered river! Showing guess panel and freezing player.");
+        
+        // Freeze player movement
+        if (playerController != null)
+        {
+            playerController.SetCanMove(false);
+            Debug.Log("🌊 Player movement frozen");
+>>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
         }
         else
         {
             Debug.LogError("❌ Player controller is null!");
         }
         
+<<<<<<< HEAD
         if (collectionRequirementPanel != null)
         {
             collectionRequirementPanel.SetActive(true);
@@ -541,10 +568,27 @@ public class GameManager : MonoBehaviour
             else
             {
                 Debug.LogError("❌ OK button is null!");
+=======
+        if (guessPanel != null)
+        {
+            guessPanel.SetActive(true);
+            Debug.Log($"🌊 Guess panel activated: {guessPanel.name}");
+            
+            // Ensure the panel is positioned correctly (not moving with player)
+            var rectTransform = guessPanel.GetComponent<RectTransform>();
+            if (rectTransform != null)
+            {
+                Debug.Log($"🌊 Panel position: {rectTransform.position}, anchored position: {rectTransform.anchoredPosition}");
+                // Force the panel to stay in screen space
+                rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+                rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+                rectTransform.anchoredPosition = Vector2.zero;
+>>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
             }
         }
         else
         {
+<<<<<<< HEAD
             Debug.LogError("❌ Collection requirement panel is null!");
         }
     }
@@ -583,6 +627,19 @@ public class GameManager : MonoBehaviour
             int remainingBlocks = totalBlocks - collectedCount;
             messageText.text = $"Go back and collect the remaining {remainingBlocks} block(s)! You have {collectedCount}/{totalBlocks} blocks.";
             Debug.Log($"📋 Main message updated: Need {remainingBlocks} more blocks");
+=======
+            Debug.LogError("❌ Guess panel is null!");
+        }
+
+        if (messageText != null)
+        {
+            messageText.text = "Guess the 4-letter word!";
+            Debug.Log("🌊 Message text updated");
+        }
+        else
+        {
+            Debug.LogError("❌ Message text is null!");
+>>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
         }
     }
 
@@ -614,6 +671,7 @@ public class GameManager : MonoBehaviour
 
         if (guessPanel == null) Debug.LogError("❌ Guess Panel not assigned!");
         if (guessInput == null) Debug.LogError("❌ Guess Input not assigned!");
+<<<<<<< HEAD
         if (messageText == null) Debug.LogError("❌ Message Text not assigned!");
         if (availableLettersText == null) Debug.LogError("❌ Available Letters Text not assigned!");
         
@@ -625,6 +683,14 @@ public class GameManager : MonoBehaviour
         if (congratulationsText == null) Debug.LogError("❌ Congratulations Text not assigned!");
 
         // Initialize UI
+=======
+        if (triesText == null) Debug.LogError("❌ Tries Text not assigned!");
+        if (messageText == null) Debug.LogError("❌ Message Text not assigned!");
+        if (availableLettersText == null) Debug.LogError("❌ Available Letters Text not assigned!");
+
+        // Initialize UI
+        if (triesText != null) triesText.text = "Tries: " + triesLeft;
+>>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
         if (messageText != null) messageText.text = "Collect all blocks!";
         if (availableLettersText != null) 
         {
@@ -643,6 +709,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("🎮 Guess panel initialized as hidden");
         }
 
+<<<<<<< HEAD
         // Ensure collection requirement panel starts hidden
         if (collectionRequirementPanel != null)
         {
@@ -657,6 +724,8 @@ public class GameManager : MonoBehaviour
             Debug.Log("🎉 Congratulations panel initialized as hidden");
         }
 
+=======
+>>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
         // Pick a starting word
         ChooseNewWord();
     }
@@ -669,6 +738,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+<<<<<<< HEAD
         // Reset the correct guess flag for new word
         hasGuessedCorrectly = false;
         Debug.Log("🔄 Reset hasGuessedCorrectly flag for new word");
@@ -694,6 +764,8 @@ public class GameManager : MonoBehaviour
             Debug.Log("🔄 OK button re-enabled for new word");
         }
 
+=======
+>>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
         // Hide guess panel when choosing new word
         if (guessPanel != null)
         {
@@ -701,6 +773,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("🎮 Guess panel hidden for new word");
         }
 
+<<<<<<< HEAD
         // Hide congratulations panel when choosing new word
         if (congratulationsPanel != null)
         {
@@ -708,6 +781,8 @@ public class GameManager : MonoBehaviour
             Debug.Log("🎉 Congratulations panel hidden for new word");
         }
 
+=======
+>>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
         // Clear available letters text for new word
         if (availableLettersText != null)
         {
@@ -768,9 +843,12 @@ public class GameManager : MonoBehaviour
         if (guess == currentWord)
         {
             Debug.Log("🎯 Correct guess! Player wins!");
+<<<<<<< HEAD
             hasGuessedCorrectly = true; // Mark that player has guessed correctly
             Debug.Log("🎯 Player has successfully guessed the word - guess panel will not reappear");
             
+=======
+>>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
             if (messageText != null) messageText.text = "✅ Correct! Crossing river...";
             
             // Unfreeze player movement
@@ -794,14 +872,22 @@ public class GameManager : MonoBehaviour
         {
             triesLeft--;
             Debug.Log($"🎯 Wrong guess! Tries left: {triesLeft}");
+<<<<<<< HEAD
+=======
+            
+            if (triesText != null) triesText.text = "Tries: " + triesLeft;
+>>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
 
             if (triesLeft <= 0)
             {
                 Debug.Log("🎯 Out of tries! Game Over!");
                 
+<<<<<<< HEAD
                 // Set game over state - this disables all controls
                 SetGameOver();
                 
+=======
+>>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
                 // Show Game Over message first
                 if (messageText != null) 
                 {
@@ -821,6 +907,16 @@ public class GameManager : MonoBehaviour
                     Debug.Log("🎯 Guess panel kept visible for Game Over message");
                 }
                 
+<<<<<<< HEAD
+=======
+                // Freeze player movement
+                if (playerController != null)
+                {
+                    playerController.SetCanMove(false);
+                    Debug.Log("🎯 Player movement frozen for game over");
+                }
+                
+>>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
                 // Quit the application after 5 seconds
                 StartCoroutine(QuitGameAfterDelay(5f));
             }
@@ -893,6 +989,7 @@ public class GameManager : MonoBehaviour
         PlayerReachedRightMarker();
     }
     
+<<<<<<< HEAD
     // Test method to manually test collection requirement message
     [ContextMenu("Test Collection Requirement Message")]
     public void TestCollectionRequirementMessage()
@@ -911,6 +1008,8 @@ public class GameManager : MonoBehaviour
         CheckRiverEntry();
     }
     
+=======
+>>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
     // Create stepping stones from stacked blocks
     private void CreateSteppingStones()
     {
@@ -1106,10 +1205,14 @@ public class GameManager : MonoBehaviour
             Debug.Log($"🎬 Final hop to calculated position: {finalPosition}");
         }
         
+<<<<<<< HEAD
         // Try the final hop with a timeout
         Debug.Log("🎬 Starting final hop with timeout protection...");
         yield return StartCoroutine(AnimateHopWithTimeout(originalPosition, finalPosition, hopHeight, hopDuration, 3f));
         Debug.Log("🎬 Final hop animation completed");
+=======
+        yield return StartCoroutine(AnimateHop(originalPosition, finalPosition, hopHeight, hopDuration));
+>>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
         
         // Small delay to ensure the player is at the final position
         yield return new WaitForSeconds(0.1f);
@@ -1118,6 +1221,7 @@ public class GameManager : MonoBehaviour
         // Trigger victory message since player reached the right marker
         Debug.Log("🏁 Player reached river right marker position - showing victory message!");
         PlayerReachedRightMarker();
+<<<<<<< HEAD
         Debug.Log("🏁 PlayerReachedRightMarker completed");
         
         // Show congratulations message after animation completes
@@ -1125,6 +1229,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("🎉 About to show congratulations message...");
         ShowCongratulationsMessage();
         Debug.Log("🎉 Congratulations message call completed");
+=======
+>>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
         
         // Restore player physics
         if (playerRb != null)
@@ -1141,6 +1247,7 @@ public class GameManager : MonoBehaviour
         // Show win message
         yield return new WaitForSeconds(0.5f);
         ShowWinMessage();
+<<<<<<< HEAD
         
         // Show congratulations message after animation completes
         yield return new WaitForSeconds(1f); // Wait a bit more for the win message to be seen
@@ -1190,6 +1297,13 @@ public class GameManager : MonoBehaviour
     private System.Collections.IEnumerator AnimateHop(Vector3 startPos, Vector3 endPos, float height, float duration)
     {
         Debug.Log($"🎬 AnimateHop started: {startPos} -> {endPos}, duration: {duration}");
+=======
+    }
+    
+    // Animate a single hop
+    private System.Collections.IEnumerator AnimateHop(Vector3 startPos, Vector3 endPos, float height, float duration)
+    {
+>>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
         float elapsedTime = 0f;
         
         while (elapsedTime < duration)
@@ -1209,7 +1323,10 @@ public class GameManager : MonoBehaviour
         
         // Ensure final position is exact
         playerTransform.position = endPos;
+<<<<<<< HEAD
         Debug.Log($"🎬 AnimateHop completed: final position {endPos}");
+=======
+>>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
     }
     
     // Show win message
@@ -1262,11 +1379,14 @@ public class GameManager : MonoBehaviour
         // Optionally, you could add game over logic here
         // For example: disable player movement, show restart button, etc.
         Debug.Log("🏁 Game completed successfully!");
+<<<<<<< HEAD
         
         // Show congratulations message after reaching the right marker
         Debug.Log("🎉 About to show congratulations message from PlayerReachedRightMarker...");
         ShowCongratulationsMessage();
         Debug.Log("🎉 Congratulations message call completed from PlayerReachedRightMarker");
+=======
+>>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
     }
     
     // Reset player to start position when all tries are exhausted

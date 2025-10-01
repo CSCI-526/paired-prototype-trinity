@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!canMove) return;
 
+<<<<<<< HEAD
         // Check if game is over - if so, disable all controls
         if (GameManager.Instance != null && GameManager.Instance.IsGameOver())
         {
@@ -66,6 +67,11 @@ public class PlayerController : MonoBehaviour
                 Debug.Log($"🚫 Player trying to move RIGHT (forward) - blocks collected: {GameManager.Instance.GetCollectedBlocksCount()}/5");
             }
         }
+=======
+        // Move right / left using D/A or arrow keys
+        float hor = 0f;
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) hor = 1f;
+>>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) hor = -1f;
 
         Vector2 v = rb.velocity;
@@ -77,12 +83,15 @@ public class PlayerController : MonoBehaviour
         
         if (jumpInput && IsGrounded() && !isJumping)
         {
+<<<<<<< HEAD
             // Debug log when trying to jump
             if (GameManager.Instance != null && GameManager.Instance.GetCollectedBlocksCount() < 5)
             {
                 Debug.Log($"🚫 Player trying to JUMP - blocks collected: {GameManager.Instance.GetCollectedBlocksCount()}/5");
             }
             
+=======
+>>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
             // Start jump
             isJumping = true;
             jumpTime = 0f;

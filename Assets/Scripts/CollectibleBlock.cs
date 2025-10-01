@@ -52,7 +52,10 @@ public class CollectibleBlock : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log($"🔵 CollectibleBlock '{gameObject.name}' triggered by: {other.name}, tag: '{other.tag}', collected: {collected}");
+<<<<<<< HEAD
         Debug.Log($"🔵 Player position: {other.transform.position}, Block position: {transform.position}");
+=======
+>>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
         
         if (other.CompareTag("Player"))
         {
@@ -70,7 +73,10 @@ public class CollectibleBlock : MonoBehaviour
                     GameManager.Instance.CollectBlock(this);
                     // Only mark as collected AFTER successful collection
                     collected = true;
+<<<<<<< HEAD
                     Debug.Log($"✅ Block '{gameObject.name}' successfully collected and marked as collected");
+=======
+>>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
                 }
                 else
                 {
