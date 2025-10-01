@@ -81,7 +81,4 @@ public class RightMarkerTrigger : MonoBehaviour
     }
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
