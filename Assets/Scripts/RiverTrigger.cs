@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class RiverTrigger : MonoBehaviour
 {
-<<<<<<< HEAD
     private Vector3 lastPlayerPosition; // Track player's last position to determine direction
     private Collider2D triggerCollider; // Collider for detecting player (trigger)
     private Collider2D barrierCollider; // Separate collider that acts as a physical barrier
@@ -44,9 +43,6 @@ public class RiverTrigger : MonoBehaviour
             Debug.LogError("❌ Failed to cast barrier collider to BoxCollider2D!");
         }
     }
-=======
-    private bool hasTriggered = false;
->>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
     
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -55,7 +51,6 @@ public class RiverTrigger : MonoBehaviour
         
         if (other.CompareTag("Player"))
         {
-<<<<<<< HEAD
             Vector3 currentPlayerPosition = other.transform.position;
             
             Debug.Log("🌊 Player entered river trigger - checking block collection status");
@@ -71,26 +66,6 @@ public class RiverTrigger : MonoBehaviour
             }
             
             lastPlayerPosition = currentPlayerPosition;
-=======
-            if (!hasTriggered)
-            {
-                Debug.Log("🌊 Player entered river trigger for the first time!");
-                hasTriggered = true;
-                
-                if (GameManager.Instance != null)
-                {
-                    GameManager.Instance.PlayerEnteredRiver();
-                }
-                else
-                {
-                    Debug.LogError("❌ GameManager.Instance is null in RiverTrigger!");
-                }
-            }
-            else
-            {
-                Debug.Log("🌊 Player entered river trigger again (already triggered)");
-            }
->>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
         }
         else
         {
@@ -109,10 +84,6 @@ public class RiverTrigger : MonoBehaviour
     // Method to reset trigger (useful for game restart)
     public void ResetTrigger()
     {
-<<<<<<< HEAD
-=======
-        hasTriggered = false;
->>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
         Debug.Log("🌊 River trigger reset");
     }
     
@@ -123,11 +94,7 @@ public class RiverTrigger : MonoBehaviour
         Debug.Log("🧪 Manually testing river trigger...");
         if (GameManager.Instance != null)
         {
-<<<<<<< HEAD
             GameManager.Instance.CheckRiverEntry();
-=======
-            GameManager.Instance.PlayerEnteredRiver();
->>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
             Debug.Log("🧪 Manual trigger successful!");
         }
         else
@@ -136,7 +103,6 @@ public class RiverTrigger : MonoBehaviour
         }
     }
     
-<<<<<<< HEAD
     // Method to enable/disable the barrier based on collection status
     public void SetBarrierActive(bool active)
     {
@@ -144,21 +110,6 @@ public class RiverTrigger : MonoBehaviour
         {
             barrierCollider.enabled = active;
             Debug.Log($"🌊 River barrier {(active ? "enabled" : "disabled")}");
-=======
-    void Start()
-    {
-        Debug.Log($"🌊 RiverTrigger '{gameObject.name}' initialized at position: {transform.position}");
-        
-        // Check if collider is properly set up
-        var collider = GetComponent<Collider2D>();
-        if (collider != null)
-        {
-            Debug.Log($"🌊 Collider found: IsTrigger={collider.isTrigger}, Size={collider.bounds.size}");
-        }
-        else
-        {
-            Debug.LogError($"❌ No Collider2D found on RiverTrigger '{gameObject.name}'!");
->>>>>>> a4d74f1e8932a0548f132bf49b417b400d974f8b
         }
     }
 }
